@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>我们的小宇宙</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="nav">
+        <span class="logo">💗 我们的故事</span>
+        <div class="nav-links">
+          <a href="#story">故事</a>
+          <a href="#memories">回忆</a>
+          <a href="#gallery">相册</a>
+          <a href="#future">未来</a>
+        </div>
+      </nav>
+      <div class="hero-content">
+        <p class="eyebrow">从相遇到相守</p>
+        <h1>这里收藏我们的小确幸</h1>
+        <p class="subtitle">
+          每一次微笑、每一次拥抱，都被记录在这座只属于我们的小宇宙里。
+        </p>
+        <div class="hero-actions">
+          <button class="primary" id="confetti">点我撒糖</button>
+          <button class="ghost" id="toggleTheme">切换心情</button>
+        </div>
+        <div class="counter" id="counter">
+          <span>我们在一起</span>
+          <strong>0</strong>
+          <span>天</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="story" class="section">
+        <div class="section-title">
+          <h2>我们的故事线</h2>
+          <p>用时间串起我们的每一个心动瞬间。</p>
+        </div>
+        <div class="timeline">
+          <article>
+            <h3>初见 · 心动</h3>
+            <p>那天的阳光和你的笑一样温柔，世界突然慢了下来。</p>
+          </article>
+          <article>
+            <h3>相知 · 默契</h3>
+            <p>一起分享歌单、宵夜和碎碎念，我们越来越懂彼此。</p>
+          </article>
+          <article>
+            <h3>相守 · 承诺</h3>
+            <p>决定把未来的每一个晨昏都写进同一本日记。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="memories" class="section soft">
+        <div class="section-title">
+          <h2>甜蜜回忆卡片</h2>
+          <p>轻轻翻开，都是幸福的味道。</p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <h3>第一次旅行</h3>
+            <p>在陌生的城市里，我们的手一直紧紧牵着。</p>
+            <span>📍 记忆坐标：_______</span>
+          </article>
+          <article class="card">
+            <h3>我们的纪念日</h3>
+            <p>你说“以后每一年都要比这一年更浪漫”。</p>
+            <span>🎉 纪念日：_______</span>
+          </article>
+          <article class="card">
+            <h3>属于我们的仪式感</h3>
+            <p>每个周末的早午餐，就是恋爱的小确幸。</p>
+            <span>☕ 约定：_______</span>
+          </article>
+        </div>
+      </section>
+
+      <section id="gallery" class="section">
+        <div class="section-title">
+          <h2>心动相册</h2>
+          <p>把照片放进这些心形框，填满我们的温柔日常。</p>
+        </div>
+        <div class="gallery">
+          <div class="photo">
+            <span>📷 照片 1</span>
+          </div>
+          <div class="photo">
+            <span>📷 照片 2</span>
+          </div>
+          <div class="photo">
+            <span>📷 照片 3</span>
+          </div>
+          <div class="photo">
+            <span>📷 照片 4</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="future" class="section soft">
+        <div class="section-title">
+          <h2>未来清单</h2>
+          <p>我们想一起完成的小目标。</p>
+        </div>
+        <div class="checklist">
+          <label>
+            <input type="checkbox" />
+            一起看一次日出
+          </label>
+          <label>
+            <input type="checkbox" />
+            把家里布置成温暖的小窝
+          </label>
+          <label>
+            <input type="checkbox" />
+            每年一起去一个新的城市
+          </label>
+          <label>
+            <input type="checkbox" />
+            写一本属于我们的旅行手帐
+          </label>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>❤️ 写给你：不止今天，每一天都想更爱你一点。</p>
+      <button class="ghost" id="openLetter">打开小情书</button>
+    </footer>
+
+    <dialog id="letter" class="letter">
+      <div class="letter-body">
+        <h3>亲爱的：</h3>
+        <p>
+          谢谢你愿意牵着我一起走过四季。愿我们一直保持初心，
+          把日子过成想象中最浪漫的样子。
+        </p>
+        <p class="signature">永远爱你的我</p>
+        <button class="primary" id="closeLetter">收好</button>
+      </div>
+    </dialog>
+
+    <script src="script.js"></script>
+  </body>
+</html>
