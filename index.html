@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>我们的纪念网站</title>
+  <style>
+    :root {
+      --black: #06060b;
+      --white: #f5f6ff;
+      --purple: #8e6bff;
+      --blue: #52a3ff;
+      --glass: rgba(15, 16, 30, 0.58);
+      --border: rgba(255, 255, 255, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+      background: radial-gradient(circle at 20% 20%, #10122e 0%, var(--black) 52%),
+                  linear-gradient(135deg, #0b103f 0%, #1a0f2f 60%, #020205 100%);
+      color: var(--white);
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 6rem 1.2rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: 0.5;
+      z-index: 0;
+    }
+
+    .hero::before {
+      width: 260px;
+      height: 260px;
+      top: 10%;
+      left: -70px;
+      background: var(--purple);
+    }
+
+    .hero::after {
+      width: 320px;
+      height: 320px;
+      right: -110px;
+      bottom: 6%;
+      background: var(--blue);
+    }
+
+    .hero-card {
+      position: relative;
+      z-index: 1;
+      width: min(900px, 95vw);
+      background: linear-gradient(140deg, rgba(35, 36, 66, 0.66), rgba(17, 20, 38, 0.82));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+      padding: clamp(1.2rem, 3.4vw, 2.6rem);
+      backdrop-filter: blur(8px);
+    }
+
+    h1, h2, h3 {
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.7rem, 4vw, 3rem);
+      margin-bottom: 0.8rem;
+      color: #ffffff;
+    }
+
+    .hero p {
+      color: #d8dcff;
+      margin-bottom: 1.5rem;
+    }
+
+    .timer {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(85px, 1fr));
+      gap: 0.9rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .timer-item {
+      background: rgba(5, 7, 19, 0.55);
+      border: 1px solid rgba(130, 175, 255, 0.34);
+      border-radius: 16px;
+      text-align: center;
+      padding: 0.9rem 0.5rem;
+    }
+
+    .timer-item strong {
+      display: block;
+      font-size: clamp(1.2rem, 3.8vw, 2rem);
+      color: var(--blue);
+    }
+
+    .timer-item span {
+      font-size: 0.88rem;
+      color: #c9ccff;
+      letter-spacing: 0.08em;
+    }
+
+    .since {
+      color: #bfc5ff;
+      font-size: 0.95rem;
+    }
+
+    .footprint-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(2, 3, 10, 0.86);
+      backdrop-filter: blur(8px);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .footprint-nav details {
+      width: min(1040px, 95vw);
+      margin: 0 auto;
+      padding: 0.8rem 0;
+    }
+
+    .footprint-nav summary {
+      list-style: none;
+      cursor: pointer;
+      font-size: 1.05rem;
+      color: #f0eeff;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      user-select: none;
+    }
+
+    .footprint-nav summary::after {
+      content: "▾";
+      color: var(--blue);
+      transition: transform 0.3s ease;
+    }
+
+    details[open] summary::after {
+      transform: rotate(180deg);
+    }
+
+    .city-links {
+      margin-top: 0.8rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    .city-links a {
+      text-decoration: none;
+      color: #101225;
+      background: linear-gradient(120deg, #d8d8ff, #9fbfff);
+      border-radius: 999px;
+      padding: 0.45rem 1rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .city-links a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(82, 163, 255, 0.35);
+    }
+
+    .city-page {
+      min-height: 100vh;
+      position: relative;
+      display: grid;
+      align-items: center;
+      padding: clamp(4rem, 10vh, 7rem) 1.2rem;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .city-page::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(2, 3, 10, 0.2) 0%,
+        rgba(4, 5, 14, 0.68) 55%,
+        rgba(2, 2, 8, 0.86) 100%
+      );
+    }
+
+    .city-card {
+      width: min(980px, 96vw);
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: clamp(1rem, 3vw, 2.2rem);
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 1.1rem;
+    }
+
+    .city-intro h2 {
+      margin-bottom: 0.9rem;
+      font-size: clamp(1.45rem, 3vw, 2rem);
+      color: #f7f4ff;
+    }
+
+    .city-intro p {
+      color: #d9dcff;
+      margin-bottom: 0.7rem;
+    }
+
+    .photo-slot {
+      background: rgba(4, 5, 16, 0.72);
+      border: 1px dashed rgba(158, 192, 255, 0.45);
+      border-radius: 18px;
+      padding: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      justify-content: space-between;
+    }
+
+    .photo-slot label {
+      font-size: 0.9rem;
+      color: #d2d7ff;
+    }
+
+    .photo-slot input {
+      color: #ced5ff;
+      font-size: 0.85rem;
+    }
+
+    .photo-preview {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: linear-gradient(140deg, rgba(90, 120, 220, 0.35), rgba(142, 107, 255, 0.35));
+    }
+
+    .suzhou {
+      background-image: url('https://images.unsplash.com/photo-1627454825918-cea5188e5f83?auto=format&fit=crop&w=1600&q=80');
+    }
+
+    .xuancheng {
+      background-image: url('https://images.unsplash.com/photo-1517309230475-6736d926b979?auto=format&fit=crop&w=1600&q=80');
+    }
+
+    .xiamen {
+      background-image: url('https://images.unsplash.com/photo-1562640953-d476f055ab6b?auto=format&fit=crop&w=1600&q=80');
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.6rem 1rem 2.4rem;
+      color: #c7cbf8;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 860px) {
+      .city-card {
+        grid-template-columns: 1fr;
+      }
+
+      .timer {
+        grid-template-columns: repeat(2, minmax(120px, 1fr));
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero {
+        padding-top: 5rem;
+      }
+
+      .footprint-nav details {
+        padding: 0.6rem 0;
+      }
+
+      .city-links a {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="hero" id="top">
+    <div class="hero-card">
+      <h1>我们的纪念时光</h1>
+      <p>在黑夜与星光之间，我们把每一次同行都写成了温柔的章节。</p>
+      <div class="timer" aria-label="在一起时长">
+        <div class="timer-item"><strong id="days">0</strong><span>天</span></div>
+        <div class="timer-item"><strong id="hours">0</strong><span>小时</span></div>
+        <div class="timer-item"><strong id="minutes">0</strong><span>分钟</span></div>
+        <div class="timer-item"><strong id="seconds">0</strong><span>秒</span></div>
+      </div>
+      <p class="since">从 2025/12/2 开始，到此刻仍在继续 ❤️</p>
+    </div>
+  </section>
+
+  <nav class="footprint-nav" aria-label="足迹导航">
+    <details>
+      <summary>足迹</summary>
+      <div class="city-links">
+        <a href="#suzhou">苏州</a>
+        <a href="#xuancheng">宣城</a>
+        <a href="#xiamen">厦门</a>
+      </div>
+    </details>
+  </nav>
+
+  <section class="city-page suzhou" id="suzhou">
+    <article class="city-card">
+      <div class="city-intro">
+        <h2>苏州 · 园林与水巷的诗意</h2>
+        <p>你我在苏州的石桥和小巷里慢慢走过，听见风里有评弹的轻声，也看见了江南园林的精巧与安静。</p>
+        <p>拙政园的曲径、平江路的灯影、金鸡湖的夜色，都成了我们故事里最柔软的底色。</p>
+      </div>
+      <div class="photo-slot">
+        <label for="photo-suzhou">在这里插入你们的苏州合照：</label>
+        <input id="photo-suzhou" type="file" accept="image/*" data-preview="preview-suzhou" />
+        <img class="photo-preview" id="preview-suzhou" alt="苏州照片预览" />
+      </div>
+    </article>
+  </section>
+
+  <section class="city-page xuancheng" id="xuancheng">
+    <article class="city-card">
+      <div class="city-intro">
+        <h2>宣城 · 山水与徽风的温度</h2>
+        <p>在宣城，我们看见山峦的层次和古镇的烟火，徽派建筑的白墙黛瓦像一首安静而悠长的诗。</p>
+        <p>敬亭山的风、古村落的路，还有你牵着我的手，都是这座城市送给我们的纪念。</p>
+      </div>
+      <div class="photo-slot">
+        <label for="photo-xuancheng">在这里插入你们的宣城合照：</label>
+        <input id="photo-xuancheng" type="file" accept="image/*" data-preview="preview-xuancheng" />
+        <img class="photo-preview" id="preview-xuancheng" alt="宣城照片预览" />
+      </div>
+    </article>
+  </section>
+
+  <section class="city-page xiamen" id="xiamen">
+    <article class="city-card">
+      <div class="city-intro">
+        <h2>厦门 · 海风与日落的浪漫</h2>
+        <p>厦门的海风把我们的笑声吹得很远，海岸线、榕树和鼓浪屿的光影都在提醒：爱可以很轻，也可以很长久。</p>
+        <p>在落日与夜色交替时，我们把“以后”说给了海听。</p>
+      </div>
+      <div class="photo-slot">
+        <label for="photo-xiamen">在这里插入你们的厦门合照：</label>
+        <input id="photo-xiamen" type="file" accept="image/*" data-preview="preview-xiamen" />
+        <img class="photo-preview" id="preview-xiamen" alt="厦门照片预览" />
+      </div>
+    </article>
+  </section>
+
+  <footer>
+    你和我，走过一城又一城，未来仍有很多页等待被写下。
+  </footer>
+
+  <script>
+    const startDate = new Date('2025-12-02T00:00:00');
+
+    function updateTimer() {
+      const now = new Date();
+      let diff = now - startDate;
+
+      if (diff < 0) {
+        diff = 0;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById('days').textContent = String(days);
+      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+
+    document.querySelectorAll('input[type="file"]').forEach((input) => {
+      input.addEventListener('change', (event) => {
+        const [file] = event.target.files;
+        const previewId = event.target.dataset.preview;
+        const previewEl = document.getElementById(previewId);
+
+        if (!file || !previewEl) {
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = ({ target }) => {
+          previewEl.src = target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+  </script>
+</body>
+</html>
